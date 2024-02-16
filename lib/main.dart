@@ -4,6 +4,7 @@ import 'package:wikiMeow/widgets/cats_search.dart';
 import 'package:flutter/material.dart';
 
 final listOfCats = catsJSON.map<CatModel>((e) => CatModel.fromJson(e)).toList();
+final favIndexes = <CatModel>[];
 
 void main() {
   runApp(const Application());

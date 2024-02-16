@@ -1,3 +1,4 @@
+import 'package:wikiMeow/main.dart';
 import 'package:wikiMeow/model/cat_model.dart';
 import 'package:wikiMeow/widgets/panels/CatDetailsWidget.dart';
 import 'package:wikiMeow/widgets/secret_widget.dart';
@@ -12,21 +13,25 @@ class CatDetails extends StatefulWidget {
 }
 
 class _CatDetailsState extends State<CatDetails> {
-  bool floatinBackgroundColorBlack = true;
   @override
   Widget build(BuildContext context) {
+    bool isitFav = favIndexes.contains(widget.catModel);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.indigo[50],
         floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: floatinBackgroundColorBlack ? Colors.black : Colors.pink,
+          backgroundColor: isitFav ? const Color.fromARGB(255, 216, 7, 77) : Colors.black,
           label: TextButton.icon(onPressed: () => {
             setState(() {
-              floatinBackgroundColorBlack = !floatinBackgroundColorBlack;
+              if(isitFav) {
+                favIndexes.remove(widget.catModel);
+              }else {
+                favIndexes.add(widget.catModel);
+              }
             })
           },
-          label: const Text("Add to Favorite", style: TextStyle(color: Colors.white),),
-          icon: const Icon(Icons.favorite, color: Colors.white,)),
+          label: Text(isitFav ? "Remove from Favorite" : "Add to Favorite", style: const TextStyle(color: Colors.white),),
+          icon: Icon(isitFav ? Icons.heart_broken : Icons.favorite, color: Colors.white,)),
           onPressed: () => {
           }, 
         ),

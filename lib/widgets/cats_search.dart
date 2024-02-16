@@ -1,4 +1,5 @@
 import 'package:wikiMeow/main.dart';
+import 'package:wikiMeow/widgets/fav_cats.dart';
 import 'package:wikiMeow/widgets/panels/CatPanelWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,9 @@ class CatsSearch extends StatelessWidget {
         leading: Padding(padding:  const EdgeInsets.all(12),
         child: Image.network("https://cdn-icons-png.flaticon.com/512/12/12321.png")),
         title: const Center(child: Text("Types of cats", style: TextStyle(fontWeight: FontWeight.bold))),
-        actions: [IconButton(onPressed: () => {}, icon: const Icon(Icons.favorite))]),
+        actions: [IconButton(onPressed: () => {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const FavoriteCats(),))
+        }, icon: const Icon(Icons.favorite))]),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 300),
         itemCount: listOfCats.length,
