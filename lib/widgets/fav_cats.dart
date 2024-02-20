@@ -34,8 +34,11 @@ class _FavoriteCatsState extends State<FavoriteCats> {
             itemCount: favIndexes.length,
             itemBuilder: (context, index) {
               return Dismissible(
-                  key: Key(favIndexes[index].name!),
-                  child: CatPanelWidget(catModel: favIndexes[index]));
+                onDismissed: (direction) => setState(() {
+                  favIndexes.remove(favIndexes[index]);
+                }),
+                key: Key(favIndexes[index].name!),
+                child: CatPanelWidget(catModel: favIndexes[index]));
             }),
       ),
     );
