@@ -20,39 +20,60 @@ class _CatDetailsState extends State<CatDetails> {
       home: Scaffold(
         backgroundColor: Colors.indigo[50],
         floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: isitFav ? const Color.fromARGB(255, 216, 7, 77) : Colors.black,
-          label: TextButton.icon(onPressed: () => {
-            setState(() {
-              if(isitFav) {
-                favIndexes.remove(widget.catModel);
-              }else {
-                favIndexes.add(widget.catModel);
-              }
-            })
-          },
-          label: Text(isitFav ? "Remove from Favorite" : "Add to Favorite", style: const TextStyle(color: Colors.white),),
-          icon: Icon(isitFav ? Icons.heart_broken : Icons.favorite, color: Colors.white,)),
-          onPressed: () => {
-          }, 
+          backgroundColor:
+              isitFav ? const Color.fromARGB(255, 216, 7, 77) : Colors.black,
+          label: TextButton.icon(
+              onPressed: () => {
+                    setState(() {
+                      isitFav
+                          ? favIndexes.remove(widget.catModel)
+                          : favIndexes.add(widget.catModel);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              child: ListTile(
+                                leading: Icon(isitFav
+                                    ? Icons.heart_broken_rounded
+                                    : Icons.favorite),
+                                title: Text(widget.catModel.name!),
+                                subtitle: Text(
+                                    "${isitFav ? "isn't" : "is"} your favorite cat now!"),
+                              ),
+                            );
+                          });
+                    })
+                  },
+              label: Text(
+                isitFav ? "Remove from Favorite" : "Add to Favorite",
+                style: const TextStyle(color: Colors.white),
+              ),
+              icon: Icon(
+                isitFav ? Icons.heart_broken : Icons.favorite,
+                color: Colors.white,
+              )),
+          onPressed: () => {},
         ),
         appBar: AppBar(
-          title: Center(child: Text(widget.catModel.name!, style: const TextStyle(fontWeight: FontWeight.bold))),
-          leading: IconButton(onPressed: () => {
-            Navigator.of(context).pop()
-          }, icon: const Icon(Icons.navigate_before)),
+          title: Center(
+              child: Text(widget.catModel.name!,
+                  style: const TextStyle(fontWeight: FontWeight.bold))),
+          leading: IconButton(
+              onPressed: () => {Navigator.of(context).pop()},
+              icon: const Icon(Icons.navigate_before)),
           actions: [
             GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-
-                return const SecretWidget(); // <---- THIS IS SECRET; DO NOT GO THERE!!!!!!!!!!
-
-              },)),
-              child:  IconButton(onPressed: null, icon: Container()),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const SecretWidget(); // <---- THIS IS SECRET; DO NOT GO THERE!!!!!!!!!!
+                },
+              )),
+              child: IconButton(onPressed: null, icon: Container()),
             )
           ],
         ),
         body: CatDetailsWidget(catModel: widget.catModel),
-        ),
+      ),
     );
   }
 }
