@@ -25,7 +25,7 @@ class _FavoriteCatsState extends State<FavoriteCats> {
             }),
         appBar: AppBar(
           title: const Center(
-              child: Text("FavoriteCats",
+              child: Text("Favorite",
                   style: TextStyle(fontWeight: FontWeight.bold))),
         ),
         body: GridView.builder(
@@ -34,11 +34,11 @@ class _FavoriteCatsState extends State<FavoriteCats> {
             itemCount: favIndexes.length,
             itemBuilder: (context, index) {
               return Dismissible(
-                onDismissed: (direction) => setState(() {
-                  favIndexes.remove(favIndexes[index]);
-                }),
-                key: Key(favIndexes[index].name!),
-                child: CatPanelWidget(catModel: favIndexes[index]));
+                  onDismissed: (direction) => setState(() {
+                        favIndexes.remove(favIndexes[index]);
+                      }),
+                  key: Key(favIndexes[index].name!),
+                  child: CatPanelWidget(catModel: favIndexes[index]));
             }),
       ),
     );

@@ -10,8 +10,8 @@ class CatModel {
   int? grooming;
   int? intelligence;
   int? otherPetsFriendly;
-  double? minWeight;
-  double? maxWeight;
+  dynamic minWeight;
+  dynamic maxWeight;
   double? minLifeExpectancy;
   double? maxLifeExpectancy;
   String? name;

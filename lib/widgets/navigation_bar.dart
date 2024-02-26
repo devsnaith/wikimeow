@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wikiMeow/widgets/cats_search.dart';
 import 'package:wikiMeow/widgets/fav_cats.dart';
+import 'package:wikiMeow/widgets/profile.dart';
 
 class NavigationWidget extends StatefulWidget {
   const NavigationWidget({super.key});
@@ -10,7 +11,7 @@ class NavigationWidget extends StatefulWidget {
 }
 
 int currentWidget = 0;
-List screens = [CatsSearch(), FavoriteCats()];
+const List screens = [CatsSearch(), FavoriteCats(), ProfileWidget()];
 
 class _NavigationWidgetState extends State<NavigationWidget> {
   @override
@@ -18,6 +19,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
     return Scaffold(
       body: screens[currentWidget],
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentWidget,
         onTap: (value) {
           setState(() {
             currentWidget = value;
@@ -27,6 +29,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: "Favorite"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );
